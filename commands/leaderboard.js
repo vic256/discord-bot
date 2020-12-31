@@ -1,11 +1,11 @@
 const discord = require('discord.js');
 exports.run = async (client, message, args, fs, config) =>
 {
-    const emoji = client.emojis.find(x => x.name === "prof");
+    const emoji = client.emojis.cache.find(x => x.name === "prof");
     message.react(emoji);
 
     let users = await global.db.User.find().sort([['level', -1]]);
-    const embed = new discord.RichEmbed()
+    const embed = new discord.MessageEmbed()
         .setFooter("© Suertzz | Mineweb.org")
         .setColor(15158332)
         .setThumbnail("https://pics.suertzz.fr/170180_trophy-icon-png-removebg-preview.png")

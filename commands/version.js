@@ -4,7 +4,7 @@ exports.run = (client, message, args, fs, config) =>
 {
     const emoji = client.emojis.find(x => x.name === "prof");
     message.react(emoji);
-    const embed = new discord.RichEmbed()
+    const embed = new discord.MessageEmbed()
         .setAuthor("Informations :", client.user.avatarURL)
         .setFooter("© Suertzz | Mineweb.org")
         .setColor(1752220)

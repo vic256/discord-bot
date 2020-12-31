@@ -1,7 +1,7 @@
 const discord = require('discord.js');
 exports.run = (client, message, args, fs, config) =>
 {
-    if (message.member.roles.some(r=>["Leader", "Administrateur"].includes(r.name))) {
+    if (message.member.roles.cache.some(r=>["Leader", "Administrateur"].includes(r.name))) {
         const emoji = client.emojis.find(x => x.name === "prof");
         message.react(emoji);
         message.delete(1);

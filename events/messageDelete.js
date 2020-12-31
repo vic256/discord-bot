@@ -4,8 +4,8 @@ exports.run = (client, fs, config, messageDelete) => {
         return;
     if (messageDelete.content.length > 1023)
         return;
-    const log = client.channels.get("461275693808877568");
-    const embed = new discord.RichEmbed()
+    const log = client.channels.cache.get("461275693808877568");
+    const embed = new discord.MessageEmbed()
         .setAuthor("Message supprimé", client.user.avatarURL)
         .setColor(15105570)
         .setThumbnail("https://pics.suertzz.fr/fJpAFgN.png")

@@ -7,14 +7,14 @@ async function jailCron(client) {
     let lists = await global.db.User.find({}).exec();
 
     if (lists) {
-        lists.forEach(async function(item) {
+        for (const item of lists) {
             if (!item.jail.permanent && (Date.now() > item.jail.date) && item.jail.state) {
                 console.log(item.id + " is in now free from jail");
                 item.jail.state = false;
-                myGuilds.fetchMember(item.id).then(member => member.removeRole(myGuilds.roles.get(jailRole))).catch(console.error);
+                myGuilds.members.fetch(item.id).then(member => member.roles.remove(myGuilds.roles.get(jailRole))).catch(console.error);
                 await item.save();
             }
-        })
+        }
     }
 }
 

@@ -2,17 +2,17 @@ const discord = require('discord.js');
 exports.run = async (client, message, args, fs, config) => {
     if (message.member.roles.some(r=>["Leader", "Administrateur", "Modérateur", "Support"].includes(r.name)))
     {
-        const emoji = client.emojis.find(x => x.name === "prof");
+        const emoji = client.emojis.cache.find(x => x.name === "prof");
         message.react(emoji);
         let target_user = message.guild.member(message.mentions.users.first());
         if (!target_user)
             message.channel.send("Argument manquant ou incorrect. Utilisation :`" + config.prefix + "unjail <@username>`");
         else if (target_user.id === message.author.id)
         {
-            const emoji = client.emojis.find(x => x.name === "facepalm");
+            const emoji = client.emojis.cache.find(x => x.name === "facepalm");
             message.channel.send("Tu ne peux pas te sortir de prison toi même " + emoji);
         }
-        else if (target_user.highestRole.position >= message.member.highestRole.position)
+        else if (target_user.roles.highest.position >= message.member.roles.highest.position)
             message.channel.send("Désolé, tu ne peux pas sortir de prison quelqu'un qui est supérieur à toi hiérarchiquement !");
         else
         {
@@ -21,8 +21,8 @@ exports.run = async (client, message, args, fs, config) => {
             if (target_user.roles.has(jail_role))
             {
 
-                target_user.removeRole(jail_role).catch(console.error);
-                target_user.addRole(member_role).catch(console.error);
+                target_user.roles.remove(jail_role).catch(console.error);
+                target_user.roles.add(member_role).catch(console.error);
                 let user = await global.db.User.findOne({id: target_user.id}).exec();
                 user.jail.state = false;
                 user.jail.date = null;
@@ -31,7 +31,7 @@ exports.run = async (client, message, args, fs, config) => {
 
                 message.channel.send(target_user + "  est libre.");
                 const log = client.channels.get("461275693808877568");
-                const embed = new discord.RichEmbed()
+                const embed = new discord.MessageEmbed()
                     .setAuthor("Sanction annulé :", client.user.avatarURL)
                     .setColor(10038562)
                     .setThumbnail("https://pics.suertzz.fr/kissclipart-prisoner-png-clipart-prison-computer-icons-ea6936fe487680b1.png")

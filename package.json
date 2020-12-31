@@ -4,7 +4,7 @@
   "dependencies": {
     "cron": "^1.7.2",
     "crontab": "^1.2.0",
-    "discord.js": "latest",
+    "discord.js": "^12.5.1",
     "moment": "^2.24.0",
     "mongoose": "^5.5.15",
     "node-docker-api": "^1.1.22",

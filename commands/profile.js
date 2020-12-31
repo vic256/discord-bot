@@ -17,9 +17,9 @@ exports.run = async (client, message, args, fs, config) =>
     }
 
     // process comamand
-    const emoji = client.emojis.find(x => x.name === "prof");
+    const emoji = client.emojis.cache.find(x => x.name === "prof");
     message.react(emoji);
-    const embed = new discord.RichEmbed()
+    const embed = new discord.MessageEmbed()
         .setAuthor("Profil de " + message.author.username)
         .setFooter("© Suertzz | Mineweb.org")
         .setColor(3447003)

@@ -53,7 +53,7 @@ exports.run = (client, message, args, fs, config) => {
         return message.member.roles.some(role => command.roles.includes(role.name))
     })
 
-    const embed = new discord.RichEmbed()
+    const embed = new discord.MessageEmbed()
         .setAuthor('Récapitulatif des commandes disponible :', client.user.avatarURL)
         .setFooter('© Suertzz | Mineweb.org')
         .setColor(3426654);
@@ -61,5 +61,5 @@ exports.run = (client, message, args, fs, config) => {
         embed.addField('`' + config.prefix + field.command + '`', field.desc)
     });
 
-    return message.channel.send({embed})
+    return message.channel.send(embed)
 }

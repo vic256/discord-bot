@@ -49,12 +49,12 @@ exports.run = (client, fs, config, event) => {
     }
     function defRole(role) {
         console.log(event.d.guild_id);
-        const myGuilds = client.guilds.get(event.d.guild_id);
-        myGuilds.fetchMember(event.d.user_id).then(member => member.addRole(myGuilds.roles.get(role))).catch(console.error);
+        const myGuilds = client.guilds.cache.get(event.d.guild_id);
+        myGuilds.members.fetch(event.d.user_id).then(member => member.roles.add(myGuilds.roles.cache.get(role))).catch(console.error);
     }
     function removeRole(role) {
-        const myGuilds = client.guilds.get(event.d.guild_id);
-        myGuilds.fetchMember(event.d.user_id).then(member => member.removeRole(myGuilds.roles.get(role))).catch(console.error);
+        const myGuilds = client.guilds.cache.get(event.d.guild_id);
+        myGuilds.members.fetch(event.d.user_id).then(member => member.roles.remove(myGuilds.roles.get(role))).catch(console.error);
     }
 };
 

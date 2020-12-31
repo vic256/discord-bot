@@ -3,3 +3,4 @@ package-lock.json
 .idea/*
 auth.json
 config.json
+discord-bot.iml

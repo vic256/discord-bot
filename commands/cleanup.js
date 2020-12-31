@@ -1,7 +1,7 @@
 exports.run = (client, message, args, fs, config) =>
 {
     if (message.channel.type === "dm") return;
-    if (message.member.roles.some(r=>["Leader", "Administrateur", "Modérateur", "Support"].includes(r.name)))
+    if (message.member.roles.cache.some(r=>["Leader", "Administrateur", "Modérateur", "Support"].includes(r.name)))
         message.delete();
     else
     {
@@ -13,11 +13,8 @@ exports.run = (client, message, args, fs, config) =>
     {
         async function m_purge()
         {
-            if (isNaN(args[1])) {
-                message.channel.send("Veuillez utiliser un nombre comme argument. Utilisation : `" + config.prefix + "cleanup messages <amount>`");
-                return;
-            }
-            const fetched = await message.channel.fetchMessages({limit: args[1]});
+            if (isNaN(args[1])) return message.channel.send("Veuillez utiliser un nombre comme argument. Utilisation : `" + config.prefix + "cleanup messages <amount>`");
+            const fetched = await message.channel.messages.fetch({limit: args[1]});
             console.log(fetched.size + " messages found, deleting...");
             message.channel.bulkDelete(fetched)
                 .catch(error => message.channel.send("Erreur : `" + error + '`'));
@@ -28,11 +25,8 @@ exports.run = (client, message, args, fs, config) =>
     {
         async function a_purge()
         {
-            if (isNaN(args[1])) {
-                message.channel.send("Veuillez utiliser un ID comme argument. Utilisation : `" + config.prefix + "cleanup after <ID>`");
-                return;
-            }
-            const fetched = await message.channel.fetchMessages({after: args[1], limit:99});
+            if (isNaN(args[1])) return message.channel.send("Veuillez utiliser un ID comme argument. Utilisation : `" + config.prefix + "cleanup after <ID>`");
+            const fetched = await message.channel.messages.fetch({after: args[1], limit:99});
             console.log(fetched.size + " messages found, deleting...");
             message.channel.bulkDelete(fetched).catch(console.log);
         }

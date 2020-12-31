@@ -10,12 +10,12 @@ async function sendWelcomeMessage(member) {
 
 async function checkIfUserIsInJail(client, member) {
     console.log("Checking if user " + member.user.id + " is in jail..");
-    const jailRole = member.guild.roles.get("601562209528840243");
-    const jailChannel = client.channels.get("602216362928111618");
+    const jailRole = member.guild.roles.cache.get("601562209528840243");
+    const jailChannel = client.channels.cache.get("602216362928111618");
     let user = await global.db.User.findOne({id: member.user.id}).exec();
 
     if (user && user.jail.state) {
-        member.addRole(jailRole).catch(console.error);
+        member.roles.add(jailRole).catch(console.error);
         jailChannel.send("Le :monkey: " + member.user + " est de retour parmis nous :monkey_face:")
     }
 }
