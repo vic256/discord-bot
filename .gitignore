@@ -4,3 +4,4 @@ package-lock.json
 auth.json
 config.json
 discord-bot.iml
+.env
