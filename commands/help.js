@@ -45,12 +45,12 @@ const commands = [
 
 exports.run = (client, message, args, fs, config) => {
     if (message.channel.type === "dm") return;
-    const emoji = client.emojis.find(x => x.name === 'prof');
+    const emoji = client.emojis.cache.find(x => x.name === 'prof');
     message.react(emoji);
 
     const fields = commands.filter((command) => {
         if (command.roles === undefined) return true; // available for all users
-        return message.member.roles.some(role => command.roles.includes(role.name))
+        return message.member.roles.cache.some(role => command.roles.includes(role.name))
     })
 
     const embed = new discord.MessageEmbed()

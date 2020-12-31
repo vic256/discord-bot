@@ -2,7 +2,7 @@ const CronJob = require('cron').CronJob;
 
 async function jailCron(client) {
     console.log("Checking if user is in jail..");
-    const myGuilds = client.guilds.get("269958087740358656"); // hard coded need improv
+    const myGuilds = client.guilds.cache.get("269958087740358656"); // hard coded need improv
     const jailRole = "601562209528840243";
     let lists = await global.db.User.find({}).exec();
 

@@ -3,7 +3,7 @@ const fs = require("fs");
 const mongoose = require('mongoose');
 const client = new discord.Client();
 const moment = require('moment');
-
+require('dotenv').config();
 
 async function init_db() {
     console.log('Initializing the database..');

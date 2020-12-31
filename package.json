@@ -9,5 +9,8 @@
     "mongoose": "^5.5.15",
     "node-docker-api": "^1.1.22",
     "semver": "^5.5.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }

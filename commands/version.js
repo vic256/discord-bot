@@ -2,7 +2,7 @@ const discord = require('discord.js');
 const info = require ('./../package.json');
 exports.run = (client, message, args, fs, config) =>
 {
-    const emoji = client.emojis.find(x => x.name === "prof");
+    const emoji = client.emojis.cache.find(x => x.name === "prof");
     message.react(emoji);
     const embed = new discord.MessageEmbed()
         .setAuthor("Informations :", client.user.avatarURL)
